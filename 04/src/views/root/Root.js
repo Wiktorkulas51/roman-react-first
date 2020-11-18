@@ -1,7 +1,11 @@
 import React from "react";
-import List from "./components/List/List";
 import "./index.css";
-import Form from "./components/Form/Form";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ArticulesView from "./arcticulesview/articulesView";
+import noteView from "./noteView/noteView";
+import twittersView from "./twitterView/twittersView";
+import Header from "../../components/navigation/header/header";
+import Modal from "../../components/modal/modal";
 
 const initialStateItems = [
   {
@@ -13,7 +17,7 @@ const initialStateItems = [
   },
 ];
 
-class App extends React.Component {
+class Root extends React.Component {
   state = {
     items: [...initialStateItems],
   };
@@ -37,12 +41,20 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <List items={this.state.items} />
-        <Form submitFn={this.addItem} />
-      </div>
+      <BrowserRouter>
+        <>
+          <Header />
+          <Switch>
+            <Modal />
+
+            <Route exact path="/" component={twittersView} />
+            <Route path="/articules" component={ArticulesView} />
+            <Route path="/notes" component={noteView} />
+          </Switch>
+        </>
+      </BrowserRouter>
     );
   }
 }
 
-export default App;
+export default Root;
