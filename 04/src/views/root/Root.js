@@ -20,6 +20,7 @@ const initialStateItems = [
 class Root extends React.Component {
   state = {
     items: [...initialStateItems],
+    isModalOpen: false,
   };
 
   addItem = (e) => {
@@ -39,18 +40,30 @@ class Root extends React.Component {
     e.target.reset();
   };
 
+  openModal = () => {
+    this.setState({
+      isModalOpen: true,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      isModalOpen: false,
+    });
+  };
+
   render() {
+    const { isModalOpen } = this.state;
     return (
       <BrowserRouter>
         <>
-          <Header />
+          <Header openModalFunc={this.openModal} />
           <Switch>
-            <Modal />
-
             <Route exact path="/" component={twittersView} />
             <Route path="/articules" component={ArticulesView} />
             <Route path="/notes" component={noteView} />
           </Switch>
+          {isModalOpen && <Modal closeModalFn={this.closeModal} />}
         </>
       </BrowserRouter>
     );

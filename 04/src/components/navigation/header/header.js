@@ -4,13 +4,14 @@ import HeaderNavigation from "../headerNavigation";
 import styles from "./header.module.scss";
 import logoImage from "../../../assets/images/logo.svg";
 
-const Header = () => {
-  console.log(styles.wrapper);
+const Header = ({ openModalFunc }) => {
   return (
     <header className={styles.wrapper}>
       <img src={logoImage} alt="favNote" className={styles.wrapperLogo} />
       <HeaderNavigation />
-      <Button secondery>add new Item</Button>
+      <Button onClick={openModalFunc} secondery>
+        add new Item
+      </Button>
     </header>
   );
 };

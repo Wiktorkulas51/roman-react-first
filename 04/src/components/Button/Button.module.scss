@@ -14,3 +14,10 @@
     background-color: #1e58ff;
     color: white
 }
+
+.close {
+    @extend .secondery;
+    position: fixed;
+    right: 50px;
+    margin-bottom: 20px;
+}
